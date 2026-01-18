@@ -1,4 +1,3 @@
-import pkg_dcache::*;
 
 module dcache_ahb_ctrl #(
   parameter int WORD_SIZE   = 32,
@@ -31,6 +30,7 @@ module dcache_ahb_ctrl #(
   input  logic                   hready,
   input  logic                   hresp
 );
+  import pkg_dcache::*;
 
   // -------------------------------------------------------------------------
   // Types and States
@@ -245,7 +245,7 @@ module dcache_ahb_ctrl #(
     // Refill on Read Miss (when AHB response is ready)
     else if (state_r == R_MISS && hready && !req_write_r) begin
       data_mem[req_index] <= hrdata;
-      tag_mem[req_index]  <= '{valid: 1'b1, tag: req_tag};
+      tag_mem[req_index]  <= {1'b1, req_tag};
     end
     // Write Hit
     else if (state_r == CMP_TAG && tag_hit && req_write_r) begin
