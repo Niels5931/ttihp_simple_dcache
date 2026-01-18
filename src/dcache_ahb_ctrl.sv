@@ -242,7 +242,7 @@ module dcache_ahb_ctrl #(
   // -------------------------------------------------------------------------
   always_ff @(posedge clk) begin
     if (state_r == FLUSH) begin
-      tag_mem[flush_cnt].valid <= 1'b0;
+      tag_mem[flush_cnt] <= '0;
     end
     // Refill on Read Miss (when AHB response is ready)
     else if (state_r == R_MISS && hready && !req_write_r) begin
