@@ -1,4 +1,3 @@
-`include "pkg_dcache.sv"
 
 module dcache_ahb_ctrl #(
   parameter int WORD_SIZE   = 32,
@@ -55,8 +54,11 @@ module dcache_ahb_ctrl #(
   localparam int TAG_WIDTH      = ADDR_LENGTH - INDEX_WIDTH - OFFSET_WIDTH;
   localparam int HSIZE_WORD     = $clog2(BYTES_PER_WORD);
 
-  // Define tag structure using package macro
-  parameter type t_dcache_tag = `DCACHE_TAG_T(TAG_WIDTH);
+  // Define tag structure
+  typedef struct packed {
+    logic                   valid;
+    logic [TAG_WIDTH-1:0]   tag;
+  } t_dcache_tag;
 
   // -------------------------------------------------------------------------
   // Internal Signals & Memories
