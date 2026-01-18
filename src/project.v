@@ -41,7 +41,8 @@ module tt_um_simple_dcache (
   // Tiny Design Mapping
   assign req_valid = ui_in[5];
   assign req_write = ui_in[6];
-  assign req_addr  = {4'd0, ui_in[4:0]};  // 4 bits address for 16 indexes (padded to 8 bits)
+  assign req_addr  = {3'd0, ui_in[4:0]};  // 5 bits address for 16 indexes, 1 offset
+  assign req_wdata = 0;
   assign req_size  = 3'b000;              // Byte size (8-bit)
 
   // Nibble selection for 4-bit CPU read
@@ -99,6 +100,10 @@ module tt_um_simple_dcache (
         uio_oe_reg  = 8'h00;     // Release bus (input mode)
         hrdata_reg  = uio_in;    // Sample input
         mem_next    = MEM_IDLE;
+      end
+
+      default: begin
+        mem_next = MEM_IDLE;
       end
     endcase
   end

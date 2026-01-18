@@ -201,6 +201,9 @@ module dcache_ahb_ctrl #(
       W_MISS: begin
         // fix later
       end
+      default: begin
+        // Default values apply
+      end
     endcase
   end
 
