@@ -1,3 +1,4 @@
+`include "pkg_dcache.sv"
 
 module dcache_ahb_ctrl #(
   parameter int WORD_SIZE   = 32,
@@ -30,7 +31,6 @@ module dcache_ahb_ctrl #(
   input  logic                   hready,
   input  logic                   hresp
 );
-  import pkg_dcache::*;
 
   // -------------------------------------------------------------------------
   // Types and States
